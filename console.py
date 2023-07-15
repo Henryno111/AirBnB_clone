@@ -43,6 +43,26 @@ class HBNBCommand(cmd.Cmd):
         """handle the case of an empty line"""
         pass
 
+    def command_with_class_name(self, line):
+        """to retrieve all instances using class name"""
+        line_to_dict = {
+                 "all": self.do_all,
+                 "show": self.do_show,
+                 "destroy": self.do_destroy,
+                 "update": self.do_update,
+                 }
+        dot = re.search(r"\.", line)
+        if dot is not None:
+            args = [line[:dot.span()[0]], line[dot.span()[1]:]]
+            dot = re.search(r"\((.*?)\)", args[1])
+            if dot is not None:
+                command = [args[1][:dot.span()[0]], dot.group()[1: -1]]
+                if command[0] in line_to_dict.keys():
+                    name_inst = "{} {}".format(args[0], command[1])
+                    return line_to_dict[command[0]](name_inst)
+        print("*** Unknown syntax: {}".format(line))
+        return False
+
     def do_quit(self, line):
         """command to exit the programm"""
         return True
