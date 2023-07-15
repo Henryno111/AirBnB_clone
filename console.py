@@ -122,7 +122,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_list = []
             for o in object_dict.values():
-                new_list.append(o.__str__())
+                if len(args) > 0 and args[0] == o.__class__.__name__:
+                    new_list.append(o.__str__())
+                elif len(args) == 0:
+                    new_list.append(o.__str__())
             print(new_list)
 
     def do_count(self, line):
@@ -193,5 +196,5 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()
