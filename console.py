@@ -34,9 +34,11 @@ def split_command(line):
 
 class HBNBCommand(cmd.Cmd):
     """Define a new class HBNBCommand"""
-    
+
     prompt = "(hbnb)"
-    __classes_name = {"BaseModel","User", "State", "City", "Amenity", "Place", "Review"}
+    __classes_name =
+    {"BaseModel", "User", "State", "City", "Amenity", "Place", "Review"}
+
 
     def emptycommand(self):
         """handle the case of an empty line"""
@@ -62,7 +64,8 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_show(self, line):
-        """show the string represnetation of an instance bzsed on the class name and id"""
+        """show the string represnetation of an instance bzsed
+        on the class name and id"""
         args = split_command(line)
         object_dict = storage.all()
         if len(line) == 0:
@@ -77,7 +80,8 @@ class HBNBCommand(cmd.Cmd):
             print(object_dict["{}.{}".format(args[0], args[1])])
 
     def do_all(self, line):
-        """pritns all string representation of instances basend on class name"""
+        """pritns all string representation of instances
+        basend on class name"""
         args = split_command(line)
         object_dict = storage.all()
         if len(args) > 0 and args[0] not in HBNBCommand.__classes_name:
@@ -90,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
 
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id""" 
+        """Deletes an instance based on the class name and id"""
         args = split_command(line)
         object_dict = storage.all()
         if len(line) == 0:
@@ -129,6 +133,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 o.__dict__[args[2]] = args[3]
         storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
