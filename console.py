@@ -33,7 +33,11 @@ def split_command(line):
 
 
 class HBNBCommand(cmd.Cmd):
-    """Define a new class HBNBCommand"""
+    """Define a new class HBNBCommand
+
+    Attributes:
+            prompt(str): the command types by the user.
+    """
 
     prompt = "(hbnb) "
     __classes_name = {
@@ -83,12 +87,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """create a new instance of BaseModel class"""
-        if len(line) == 0:
+        args = split_command(line)
+        if len(args) == 0:
             print("** class name missing **")
-        elif line not in HBNBCommand.__classes_name:
+        elif args[0] not in HBNBCommand.__classes_name:
             print("** class doesn't exist **")
         else:
-            print(eval(line)().id)
+            print(eval(args[0])().id)
             storage.save()
 
     def do_show(self, line):
@@ -96,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
         on the class name and id"""
         args = split_command(line)
         object_dict = storage.all()
-        if len(line) == 0:
+        if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__classes_name:
             print("** class doesn't exist **")
@@ -132,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
         """Deletes an instance based on the class name and id"""
         args = split_command(line)
         object_dict = storage.all()
-        if len(line) == 0:
+        if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__classes_name:
             print("** class doesn't exist **")
@@ -148,7 +153,7 @@ class HBNBCommand(cmd.Cmd):
         """update the instance based on class name and the id"""
         args = split_command(line)
         object_dict = storage.all()
-        if len(line) == 0:
+        if len(args) == 0:
             print("** class name missing **")
             return False
         elif args[0] not in HBNBCommand.__classes_name:
