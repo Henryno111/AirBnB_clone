@@ -35,7 +35,7 @@ def split_command(line):
 class HBNBCommand(cmd.Cmd):
     """Define a new class HBNBCommand"""
 
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
     __classes_name = {
             "BaseModel",
             "User",
