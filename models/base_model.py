@@ -10,7 +10,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """ Initialize a new BaseModel
-        
+
         Args:
             *args(any): unused
             **kwargs(dict): key/value ot attributes
@@ -27,8 +27,8 @@ class BaseModel:
                     self.__dict__[k] = v
         else:
             models.storage.new(self)
-                   
-    
+
+
     def save(self):
         """update a public attribute"""
         self.updated_at = datetime.today()

@@ -5,7 +5,7 @@ from models.base_model import BaseModel
 
 class State(BaseModel):
     """represent the state class
-    
+
     Attributes:
            name(str): empty string
     """
