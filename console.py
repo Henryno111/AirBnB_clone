@@ -119,6 +119,13 @@ class HBNBCommand(cmd.Cmd):
                 new_list.append(o.__str__())
             print(new_list)
 
+    def do_count(self, line):
+        """ to count the instances number of any class"""
+        args = split_command(line)
+        c = 0
+        for obj in storage.all().values():
+            if args[0] == obj.__class__.__name__:
+                c += 1
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id"""
@@ -142,16 +149,25 @@ class HBNBCommand(cmd.Cmd):
         object_dict = storage.all()
         if len(line) == 0:
             print("** class name missing **")
+            return False
         elif args[0] not in HBNBCommand.__classes_name:
             print("** class doesn't exist **")
+            return False
         elif len(args) == 1:
             print("** instance id missing **")
+            return False
         elif "{}.{}".format(args[0], args[1]) not in object_dict.keys():
             print("** no instance found **")
+            return False
         elif len(args) == 2:
             print("** attribute name missing **")
+            return False
         elif len(args) == 3:
-            print("** value missing **")
+            try:
+                type(eval(args[2])) != dict
+            except NameError:
+                print("** value missing **")
+                return False
         if len(args) == 4:
             o = object_dict["{}.{}".format(args[0], args[1])]
             if args[2] in o.__dict__.keys():
@@ -159,6 +175,15 @@ class HBNBCommand(cmd.Cmd):
                 o.__dict__[args[2]] = valtype(args[3])
             else:
                 o.__dict__[args[2]] = args[3]
+        elif type(eval(args[2])) == dict:
+            o = object_dict["{}.{}".format(args[0], args[1])]
+            for k, v in eval(args[2]).items():
+                if (k in o.__class__.__dict__.keys() and
+                        type(o.__class__.__dict__[k]) in {str, int, float}):
+                    valtype = type(o.__class__.__dict__[k])
+                    o.__dict__[k] = valtype(v)
+                else:
+                    o.__dict__[k] = v
         storage.save()
 
 
