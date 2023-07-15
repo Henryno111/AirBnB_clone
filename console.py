@@ -58,6 +58,7 @@ class HBNBCommand(cmd.Cmd):
                  "show": self.do_show,
                  "destroy": self.do_destroy,
                  "update": self.do_update,
+                 "count": self.do_count
                  }
         dot = re.search(r"\.", line)
         if dot is not None:
@@ -72,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def do_quit(self, line):
-        """command to exit the programm"""
+        """Quit command to exit the programm"""
         return True
 
     def do_EOF(self, line):
