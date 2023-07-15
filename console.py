@@ -16,7 +16,7 @@ from models.review import Review
 def split_command(line):
     """a function to split the input"""
     curly_braces = re.search(r"\{(.*?)\}", line)
-    brackets = re.search(r"\[(.*?)]", line)
+    brackets = re.search(r"\[(.*?)\]", line)
     if brackets is None:
         if curly_braces is None:
             return [i.strip(",") for i in split(line)]
@@ -135,6 +135,7 @@ class HBNBCommand(cmd.Cmd):
         for obj in storage.all().values():
             if args[0] == obj.__class__.__name__:
                 c += 1
+        print(c)
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id"""
@@ -159,19 +160,19 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return False
-        elif args[0] not in HBNBCommand.__classes_name:
+        if args[0] not in HBNBCommand.__classes_name:
             print("** class doesn't exist **")
             return False
-        elif len(args) == 1:
+        if len(args) == 1:
             print("** instance id missing **")
             return False
-        elif "{}.{}".format(args[0], args[1]) not in object_dict.keys():
+        if "{}.{}".format(args[0], args[1]) not in object_dict.keys():
             print("** no instance found **")
             return False
-        elif len(args) == 2:
+        if len(args) == 2:
             print("** attribute name missing **")
             return False
-        elif len(args) == 3:
+        if len(args) == 3:
             try:
                 type(eval(args[2])) != dict
             except NameError:
