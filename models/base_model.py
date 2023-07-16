@@ -28,7 +28,6 @@ class BaseModel:
         else:
             models.storage.new(self)
 
-
     def save(self):
         """update a public attribute"""
         self.updated_at = datetime.today()
@@ -44,4 +43,5 @@ class BaseModel:
 
     def __str__(self):
         """ represent the instance of this class"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format
+        (self.__class__.__name__, self.id, self.__dict__)
