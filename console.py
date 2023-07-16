@@ -56,17 +56,12 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def strip_clean(self, args):
-        """strips the argument and return a string of command
-        Args:
-            args: input list of args
-        Return:
-            returns string of argumetns
-        """
+        """return a string of command"""
         new_list = []
         new_list.append(args[0])
         try:
             my_dict = eval(
-                args[1][args[1].find('{'):args[1].find('}')+1])
+                    args[1][args[1].find('{'):args[1].find('}')+1])
         except Exception:
             my_dict = None
         if isinstance(my_dict, dict):
@@ -79,9 +74,7 @@ class HBNBCommand(cmd.Cmd):
         return " ".join(i for i in new_list)
 
     def default(self, line):
-        """retrieve all instances of a class and
-        retrieve the number of instances
-        """
+        """retrieve all instances of a class"""
         my_list = line.split('.')
         if len(my_list) >= 2:
             if my_list[1] == "all()":
@@ -96,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
                 args = self.strip_clean(my_list)
                 if isinstance(args, list):
                     obj = storage.all()
-                    key = args[0] + ' ' + args[1]
+                    key = args[0] + ' ' +args[1]
                     for k, v in args[2].items():
                         self.do_update(key + ' "{}" "{}"'.format(k, v))
                 else:
