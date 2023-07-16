@@ -23,7 +23,7 @@ class FileStorage:
     def all(self):
         """Return the dictionary"""
         return FileStorage.__objects
-   
+
     def new(self, obj):
         """set the value of objects"""
         clname = obj.__class__.__name__
