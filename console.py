@@ -175,7 +175,7 @@ class HBNBCommand(cmd.Cmd):
             del object_dict["{}.{}".format(args[0], args[1])]
             storage.save()
 
-    def update(self, line):
+    def do_update(self, line):
         """update the instance based on class name and the id"""
         args = split_command(line)
         object_dict = storage.all()
