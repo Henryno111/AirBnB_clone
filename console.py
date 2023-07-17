@@ -50,7 +50,6 @@ class HBNBCommand(cmd.Cmd):
             "Review"
             }
 
-
     def emptycommand(self):
         """handle the case of an empty line"""
         pass
@@ -89,14 +88,13 @@ class HBNBCommand(cmd.Cmd):
                 args = self.strip_clean(my_list)
                 if isinstance(args, list):
                     obj = storage.all()
-                    key = args[0] + ' ' +args[1]
+                    key = args[0] + ' ' + args[1]
                     for k, v in args[2].items():
                         self.do_update(key + ' "{}" "{}"'.format(k, v))
                 else:
                     self.do_update(args)
         else:
             cmd.Cmd.default(self, line)
-
 
     def do_quit(self, line):
         """Quit command to exit the programm"""

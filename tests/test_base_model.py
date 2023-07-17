@@ -16,7 +16,7 @@ import models
 
 class TestBaseModel_initialization(unittest.TestCase):
     """represent the class to test initialization of the Base"""
-    
+
     def test_no_args(self):
         self.assertEqual(BaseModel, type(BaseModel()))
 
@@ -31,7 +31,7 @@ class TestBaseModel_initialization(unittest.TestCase):
 
     def test_updated_at_is_public(self):
         self.assertEqual(datetime, type(BaseModel().updated_at))
-    
+
     def test_two_models_unique(self):
         bm1 = BaseModel()
         bm2 = BaseModel()
@@ -48,7 +48,7 @@ class TestBaseModel_initialization(unittest.TestCase):
         sleep(0.05)
         bm2 = BaseModel()
         self.assertLess(bm1.updated_at, bm2.updated_at)
-    
+
     def test_str_representation(self):
         bm = BaseModel()
         d = datetime.today()
@@ -60,11 +60,11 @@ class TestBaseModel_initialization(unittest.TestCase):
         self.assertIn("'id': '11345'", bm_repr)
         self.assertIn("'created_at': " + d_repr, bm_repr)
         self.assertIn("'updated_at': " + d_repr, bm_repr)
-        
+
     def test_args_unused(self):
         bm = BaseModel(None)
         self.assertNotIn(None, bm.__dict__.values())
-        
+
     """def test_initialization_kwargs(self):
         d = datetime.today()
         d_form = d.isoformat()
@@ -72,16 +72,18 @@ class TestBaseModel_initialization(unittest.TestCase):
         self.assertEqual(bm.id, "234")
         self.assertEqual(bm.created_at, d_form)
         self.assertequal(bm.updated_at, d_form)"""
-        
+
     def test_initialization_with_None_kwargs(self):
         with self.assertRaises(TypeError):
             BaseModel(id=None, created_at=None, updated_at=None)
-            
+
+
 """
     def test_initialization_with_args_and_kwargs(self):
         d = datetime.today()
         d_form = d.isoformat()
-        bm = BaseModel("12", id = "234", created_at = d_form, updated_at = d_form)
+        bm = BaseModel("12", id = "234", created_at = d_form,
+        updated_at = d_form)
         self.assertEqual(bm.id, "234")
         self.assertEqual(bm.created_at, d_form)
         self.assertequal(bm.updated_at, d_form)"""
