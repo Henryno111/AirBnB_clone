@@ -1,0 +1,13 @@
+footer{
+  background-color: white;
+  height: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  position: fixed;
+  border-top: 1px solid #CCCCCC;
+}
+.foot{
+  margin: auto;
